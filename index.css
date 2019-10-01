@@ -1,0 +1,116 @@
+.container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.wrapper {
+  width: 50%;
+  height: 700px;
+  border: 1px solid #353533;
+  border-radius: 4px;
+  background: #1f1f1f;
+
+}
+
+.title {
+  text-align: center;
+  color: #add8e6;
+  font-family: cursive;
+  width: 100%;
+  padding: 15px 0px 15px 0px;
+  border-bottom: 1px solid #add8e6;
+  margin: auto;
+}
+
+.InputWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  margin-top: 30px;
+}
+
+.nameDiv {
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.nameLabel {
+  width: 40%;
+  text-align: left;
+  margin-right: 4px;
+  text-transform: uppercase;
+  color: #add8e6;
+}
+
+.nameInput {
+  width: 40%;
+  border: 1px solid #ced4da;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border-radius: .25rem;
+  height: 26px;
+}
+
+.phoneDiv {
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.phoneLabel {
+  width: 40%;
+  text-align: left;
+  margin-right: 4px;
+  text-transform: uppercase;
+}
+
+.phoneInput {
+  width: 40%;
+  border: 1px solid #ced4da;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border-radius: .25rem;
+  height: 26px;
+}
+
+.emailDiv {
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.emailLabel {
+  width: 40%;
+  text-align: left;
+  margin-right: 4px;
+  text-transform: uppercase;
+}
+
+.emailInput {
+  width: 40%;
+  border: 1px solid #ced4da;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border-radius: .25rem;
+  height: 26px;
+}
+
+.Button {
+  margin-top: 30px;
+  width: 40%;
+  height: 29px;
+  background: #add8e6;
+  border: none;
+  text-transform: uppercase;
+}
