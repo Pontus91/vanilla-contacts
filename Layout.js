@@ -63,6 +63,15 @@ emailLabel.setAttribute('class', 'nameLabel');
 emailInput.setAttribute('class', 'nameInput');
 
 /**
+ * Elements for the contacts
+ */
+const ContactWrapper = document.createElement('div');
+ContactWrapper.setAttribute('class', 'contacts');
+const ul = document.createElement('ul');
+ul.setAttribute('class', 'ul');
+
+
+/**
  * InnerHTML to all form, input and label elements.
  */
 nameLabel.innerHTML = 'Namn';
@@ -75,6 +84,8 @@ emailLabel.innerHTML = 'E-mail';
 container.appendChild(wrapper);
 wrapper.appendChild(heading);
 wrapper.appendChild(InputWrapper);
+wrapper.appendChild(ContactWrapper);
+ContactWrapper.appendChild(ul);
 InputWrapper.appendChild(nameDiv);
 InputWrapper.appendChild(phoneDiv);
 InputWrapper.appendChild(emailDiv);
@@ -88,3 +99,24 @@ emailDiv.appendChild(emailInput);
 body.append(container);
 
 
+/**
+ * Attributes for the input and button.
+ */
+Button.setAttribute('onclick', '');
+nameInput.setAttribute('name', 'test');
+nameInput.setAttribute('id', 'name')
+
+class Contact {
+
+  constructor(name, phoneNumber) {
+    this.name = name;
+    this.phoneNumber = phoneNumber;
+  }
+
+}
+
+document.querySelector('Button').addEventListener("click", function () {
+  let nameValue = document.querySelector('#name').value;
+  let testGuy = new Contact(nameValue, ['010-101010', '0735-033-033']);
+  console.log(testGuy)
+})

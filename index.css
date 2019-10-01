@@ -113,4 +113,22 @@
   background: #add8e6;
   border: none;
   text-transform: uppercase;
+  font-weight: bold;
+}
+
+.Button:hover {
+  background: #9cddf3c4;
+  cursor: pointer;
+}
+
+.contacts {
+  width: 100%;
+  height: auto;
+  margin-top: 70px;
+}
+
+.ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
