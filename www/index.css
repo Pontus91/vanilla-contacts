@@ -133,6 +133,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .add {
@@ -208,4 +209,16 @@
   width: 200px;
   height: 200px;
   background: blue;
+}
+
+.li {
+  color: #add8e6;
+  margin: 3px 0px 3px 0px;
+  border: 1px solid #add8e6;
+  padding: 8px;
+}
+
+.li:hover {
+  font-weight: bold;
+  cursor: pointer;
 }
