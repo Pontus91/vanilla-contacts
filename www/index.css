@@ -205,12 +205,6 @@
   cursor: pointer;
 }
 
-.txx {
-  width: 200px;
-  height: 200px;
-  background: blue;
-}
-
 .li {
   color: #add8e6;
   margin: 3px 0px 3px 0px;
@@ -221,4 +215,118 @@
 .li:hover {
   font-weight: bold;
   cursor: pointer;
+}
+
+.detailWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user {
+  width: 50%;
+  height: auto;
+  border: 1px solid #1f1f1f;
+  border-radius: 4px;
+  background-color: #1f1f1f;
+  display: flex;
+  flex-direction: column;
+}
+
+.contactInfo {
+  text-align: center;
+  color: #add8e6;
+  font-family: cursive;
+  width: 100%;
+  padding: 15px 0px 15px 0px;
+  margin: auto;
+  width: 50%;
+  background-color: #1f1f1f;
+  border-bottom: 1px solid #add8e6;
+  margin-top: 50px;
+}
+
+.contactName {
+  display: flex;
+  justify-content: center;
+  height: auto;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+.name {
+  color: #add8e6;
+  font-size: 19px;
+}
+
+.back {
+  width: 50%;
+  height: 40px;
+  background: #1f1f1f;
+  border: none;
+  border-top: 1px solid #add8e6;
+  border-radius: 4px;
+  color: #add8e6;
+  text-transform: uppercase;
+}
+
+.back:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.historyTitle {
+  color: #add8e6;
+}
+
+.history {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  margin-bottom: 10px;
+  flex-direction: column;
+}
+
+.historyDiv {
+  border: 1px solid #add8e6;
+  width: 50%;
+  height: auto;
+}
+
+.edit {
+  border: 1px solid #add8e6;
+  height: 26px;
+  color: #add8e6;
+  background-color: #1f1f1f;
+}
+
+.edit:hover {
+  background-color: #add8e6;
+  border: 1px solid #1f1f1f;
+  color: #1f1f1f;
+  cursor: pointer;
+}
+
+.nameInfo {
+  margin-top: 70px;
+  color: #add8e6;
+}
+
+.inputEdit {
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #add8e6;
+  color: #add8e6;
+}
+
+.saveButton {
+  border: 1px solid #add8e6;
+  height: 26px;
+  color: #add8e6;
+  background-color: #1f1f1f;
+  margin-top: 80px;
 }
