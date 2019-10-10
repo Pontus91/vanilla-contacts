@@ -1,21 +1,23 @@
 class Contact {
 
-  constructor(name, phoneNumbers, contactMail) {
+  constructor(name, phoneNumbers, contactMail, history) {
     this.name = name;
     this.phoneNumbers = phoneNumbers;
     this.contactMail = contactMail;
+    this.history = [];
   }
 
 }
 
 let contactNumbers = [];
 let contactEmails = [];
+let history = [];
 
 window.onload = function () {
- displayUsers()
+  displayUsers()
 }
 
-function displayUsers(){
+function displayUsers() {
   let allContacts = JSON.parse(localStorage.getItem("contacts"));
   if (allContacts == undefined || null) {
   } else if (allContacts.length > 0) {
@@ -45,7 +47,7 @@ window.addEventListener('click', e => {
     contactEmails = contactEmails.filter(v => v != '');
     let userNumbers = [...contactNumbers]
     let userEmails = [...contactEmails]
-    store.contact = new Contact(nameValue, userNumbers, userEmails)
+    store.contact = new Contact(nameValue, userNumbers, userEmails, history)
     let contacts;
     if (localStorage.getItem('contacts') === null) {
       contacts = [];
@@ -66,7 +68,7 @@ window.addEventListener('click', e => {
     document.querySelector('#nameValue').select();
     contactNumbers.length = 0;
     contactEmails.length = 0;
-   
+
   }
 
   /**
@@ -99,63 +101,93 @@ window.addEventListener('click', e => {
   }
 
   /** 
-   * Test function
+   * Navigate function to different route.
+   * Using my onNavigate function from routes.js
    */
   if (e.target.closest('.li')) {
     onNavigate('/contact');
     let contactTarget = document.querySelector('.name');
     contactTarget.innerHTML = e.target.innerHTML;
   }
-  if(e.target.closest('.back')){
+  if (e.target.closest('.back')) {
     onNavigate('/');
     location.reload(true);
   }
 
-  if(e.target.closest('.edit')){
+  if (e.target.closest('.edit')) {
+    let nameInfo = document.createElement('p');
+    let nameEdit = document.createElement('input');
+    nameInfo.innerHTML = 'Redigera namn här';
+    nameInfo.setAttribute('class', 'nameInfo')
+    let phoneInfo = document.createElement('p');
+    let phoneEdit = document.createElement('input');
+    phoneInfo.innerHTML = 'Redigera telefonnummer här';
+    phoneInfo.setAttribute('class', 'nameInfo');
+    let emailInfo = document.createElement('p');
+    let emailEdit = document.createElement('input');
+    emailInfo.innerHTML = 'Redigera mailadresser här';
+    emailInfo.setAttribute('class', 'nameInfo');
+    let saveButton = document.createElement('Button');
+    saveButton.setAttribute('class', 'saveButton');
+    saveButton.innerHTML = 'Spara redigerad kontakt';
+    let targetForElement = document.querySelector('.contactName')
+    targetForElement.appendChild(nameInfo);
+    targetForElement.appendChild(nameEdit);
+    targetForElement.appendChild(phoneInfo);
+    targetForElement.appendChild(phoneEdit);
+    targetForElement.appendChild(emailInfo);
+    targetForElement.appendChild(emailEdit);
+    targetForElement.appendChild(saveButton);
+
+    nameEdit.setAttribute('class', 'inputEdit');
+    nameEdit.setAttribute('id', 'nameEdit')
+    phoneEdit.setAttribute('class', 'inputEdit');
+    phoneEdit.setAttribute('id', 'phoneEdit')
+    emailEdit.setAttribute('class', 'inputEdit');
+    emailEdit.setAttribute('id', 'emailEdit');
+  }
+
+  if (e.target.closest('.saveButton')) {
+    let newName = document.querySelector('#nameEdit').value;
+    let newPhones = document.querySelector('#phoneEdit').value;
+    let newEmails = document.querySelector('#emailEdit').value;
     let myCurrentContacts = JSON.parse(localStorage.getItem("contacts"));
     myCurrentContacts.forEach(function (person) {
       let contact = person;
       let contactElement = document.querySelector('.name');
-      if(contactElement.innerHTML === contact.name + ' ' + contact.phoneNumbers + ' ' + contact.contactMail){
-        let nameInfo = document.createElement('p');
-        let nameEdit = document.createElement('input');
-        nameInfo.innerHTML = 'Redigera namn här';
-        nameInfo.setAttribute('class', 'nameInfo')
-        let phoneInfo = document.createElement('p');
-        let phoneEdit = document.createElement('input');
-        phoneInfo.innerHTML = 'Redigera telefonnummer här';
-        phoneInfo.setAttribute('class', 'nameInfo');
-        let emailInfo = document.createElement('p');
-        let emailEdit = document.createElement('input');
-        emailInfo.innerHTML = 'Redigera mailadresser här';
-        emailInfo.setAttribute('class', 'nameInfo');
-        let saveButton = document.createElement('Button');
-        saveButton.setAttribute('class', 'saveButton');
-        saveButton.innerHTML = 'Spara redigerad kontakt';
-        let targetForElement = document.querySelector('.contactName')
-        targetForElement.appendChild(nameInfo);
-        targetForElement.appendChild(nameEdit);
-        targetForElement.appendChild(phoneInfo);
-        targetForElement.appendChild(phoneEdit);
-        targetForElement.appendChild(emailInfo);
-        targetForElement.appendChild(emailEdit);
-        targetForElement.appendChild(saveButton);
+      if (contactElement.innerHTML === contact.name + ' ' + contact.phoneNumbers + ' ' + contact.contactMail) {
+        contact.history = [contactElement.innerHTML];
+        if (newName === '') {
+          contact.name = contact.name;
+        } else {
+          contact.name = newName;
+        }
+        if (newPhones === '') {
+          contact.phoneNumbers = contact.phoneNumbers;
+        } else {
+          let newPhoneNumbers = [];
+          newPhoneNumbers.push(newPhones);
+          contact.phoneNumbers = [...newPhoneNumbers];
+        }
+        if (newEmails === '') {
+          contact.contactMail = contact.contactMail;
+        } else {
+          let newEmailAdresses = [];
+          newEmailAdresses.push(newEmails);
+          contact.contactMail = [...newEmailAdresses];
+        }
+        localStorage.setItem('contacts', JSON.stringify(myCurrentContacts));
+        let newTarget = document.querySelector('.name');
+        let newHTMLforContact = (JSON.stringify(contact));
+        let newContactInfo = JSON.parse(newHTMLforContact);
+        newTarget.innerHTML = newContactInfo.name + ' ' + newContactInfo.phoneNumbers + ' ' + newContactInfo.contactMail;
 
-        nameEdit.setAttribute('class', 'inputEdit');
-        nameEdit.setAttribute('id', 'nameEdit')
-        phoneEdit.setAttribute('class', 'inputEdit');
-        phoneEdit.setAttribute('id', 'phoneEdit')
-        emailEdit.setAttribute('class', 'inputEdit');
-        emailEdit.setAttribute('id', 'emailEdit');
-
-        console.log('YES');
-        console.log(contact)
-
-
+        console.log(contact.history, 'Detta ska in i historik htmlen')
       }
     })
-    
+
 
   }
+
 })
 
