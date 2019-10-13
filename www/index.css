@@ -8,7 +8,7 @@
 
 .wrapper {
   width: 50%;
-  height: 700px;
+  height: auto;
   border: 1px solid #353533;
   border-radius: 4px;
   background: #1f1f1f;
@@ -210,6 +210,7 @@
   margin: 3px 0px 3px 0px;
   border: 1px solid #add8e6;
   padding: 8px;
+  width: 55%;
 }
 
 .li:hover {
@@ -295,6 +296,10 @@
   border: 1px solid #add8e6;
   width: 50%;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .edit {
@@ -336,4 +341,8 @@
   border: 1px solid #1f1f1f;
   color: #1f1f1f;
   cursor: pointer;
+}
+
+.historyText {
+  color: #add8e6;
 }

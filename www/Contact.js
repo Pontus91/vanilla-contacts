@@ -108,12 +108,31 @@ window.addEventListener('click', e => {
     onNavigate('/contact');
     let contactTarget = document.querySelector('.name');
     contactTarget.innerHTML = e.target.innerHTML;
+    let targetContacts = JSON.parse(localStorage.getItem("contacts"));
+    targetContacts.forEach(function (myTarget) {
+      let myContact = myTarget;
+      let contactElement = document.querySelector('.name');
+      if (contactElement.innerHTML === myContact.name + ' ' + myContact.phoneNumbers + ' ' + myContact.contactMail) {
+        let contactHistory = myContact.history;
+        if (contactHistory.length > 0) {
+          let historyText = document.createElement('p');
+          historyText.setAttribute('class', 'historyText');
+          let historyElement = document.querySelector('.historyDiv');
+          historyText.innerHTML = contactHistory;
+          historyElement.appendChild(historyText);
+        }
+      }
+    })
+
   }
   if (e.target.closest('.back')) {
     onNavigate('/');
     location.reload(true);
   }
 
+  /** 
+   * Edit contact function and adds input element for the new value.
+   */
   if (e.target.closest('.edit')) {
     let nameInfo = document.createElement('p');
     let nameEdit = document.createElement('input');
@@ -147,6 +166,10 @@ window.addEventListener('click', e => {
     emailEdit.setAttribute('id', 'emailEdit');
   }
 
+  /**
+   * Saving the user after edit with spread operators 
+   * And also adding the history so the user for the application can see how the user was before the edit.
+   */
   if (e.target.closest('.saveButton')) {
     let newName = document.querySelector('#nameEdit').value;
     let newPhones = document.querySelector('#phoneEdit').value;
@@ -182,7 +205,11 @@ window.addEventListener('click', e => {
         let newContactInfo = JSON.parse(newHTMLforContact);
         newTarget.innerHTML = newContactInfo.name + ' ' + newContactInfo.phoneNumbers + ' ' + newContactInfo.contactMail;
 
-        console.log(contact.history, 'Detta ska in i historik htmlen')
+        let historyText = document.createElement('p');
+        historyText.setAttribute('class', 'historyText');
+        let historyElement = document.querySelector('.historyDiv');
+        historyText.innerHTML = contact.history;
+        historyElement.appendChild(historyText);
       }
     })
 
