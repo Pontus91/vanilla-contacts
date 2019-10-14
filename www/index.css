@@ -177,14 +177,6 @@
   margin-top: 10px;
 }
 
-.remove {
-  margin-left: 5px;
-  border-radius: 9px;
-  background-color: black;
-  border: 1px solid #add8e6;
-  color: #add8e6;
-}
-
 .emailHolder {
   display: flex;
   width: 40%;
@@ -234,6 +226,8 @@
   background-color: #1f1f1f;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .contactInfo {
@@ -287,14 +281,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: auto;
   margin-bottom: 10px;
   flex-direction: column;
+  width: 100%;
 }
 
 .historyDiv {
   border: 1px solid #add8e6;
-  width: 50%;
+  width: 70%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -345,4 +340,19 @@
 
 .historyText {
   color: #add8e6;
+}
+
+.remove {
+  border: 1px solid #add8e6;
+  height: 26px;
+  color: #add8e6;
+  background-color: #1f1f1f;
+  margin-top: 20px;
+}
+
+.remove:hover {
+  background-color: #add8e6;
+  border: 1px solid #1f1f1f;
+  color: #1f1f1f;
+  cursor: pointer;
 }

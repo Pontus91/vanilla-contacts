@@ -115,11 +115,13 @@ window.addEventListener('click', e => {
       if (contactElement.innerHTML === myContact.name + ' ' + myContact.phoneNumbers + ' ' + myContact.contactMail) {
         let contactHistory = myContact.history;
         if (contactHistory.length > 0) {
-          let historyText = document.createElement('p');
-          historyText.setAttribute('class', 'historyText');
-          let historyElement = document.querySelector('.historyDiv');
-          historyText.innerHTML = contactHistory;
-          historyElement.appendChild(historyText);
+          contactHistory.forEach(function (target) {
+            let historyText = document.createElement('p');
+            historyText.setAttribute('class', 'historyText')
+            let historyElement = document.querySelector('.historyDiv');
+            historyText.innerHTML = target;
+            historyElement.appendChild(historyText);
+          })
         }
       }
     })
@@ -179,7 +181,6 @@ window.addEventListener('click', e => {
       let contact = person;
       let contactElement = document.querySelector('.name');
       if (contactElement.innerHTML === contact.name + ' ' + contact.phoneNumbers + ' ' + contact.contactMail) {
-        contact.history = [contactElement.innerHTML];
         if (newName === '') {
           contact.name = contact.name;
         } else {
@@ -199,21 +200,50 @@ window.addEventListener('click', e => {
           newEmailAdresses.push(newEmails);
           contact.contactMail = [...newEmailAdresses];
         }
+
+        if (contact.history.length > 0) {
+          let newHistory = [...contact.history, contactElement.innerHTML]
+          contact.history = newHistory;
+          let historyText = document.createElement('p');
+          historyText.setAttribute('class', 'historyText')
+          let historyElement = document.querySelector('.historyDiv');
+          let latestHistory = contact.history.slice(-1)[0];
+          historyText.innerHTML = latestHistory;
+          historyElement.appendChild(historyText);
+
+
+        } else if (contact.history.length === 0) {
+          contact.history.push(contactElement.innerHTML);
+          let historyText = document.createElement('p');
+          historyText.setAttribute('class', 'historyText')
+          let historyElement = document.querySelector('.historyDiv');
+          historyText.innerHTML = contact.history;
+          historyElement.appendChild(historyText);
+        }
+
         localStorage.setItem('contacts', JSON.stringify(myCurrentContacts));
         let newTarget = document.querySelector('.name');
         let newHTMLforContact = (JSON.stringify(contact));
         let newContactInfo = JSON.parse(newHTMLforContact);
         newTarget.innerHTML = newContactInfo.name + ' ' + newContactInfo.phoneNumbers + ' ' + newContactInfo.contactMail;
-
-        let historyText = document.createElement('p');
-        historyText.setAttribute('class', 'historyText');
-        let historyElement = document.querySelector('.historyDiv');
-        historyText.innerHTML = contact.history;
-        historyElement.appendChild(historyText);
       }
     })
+  }
 
-
+  /**
+   * Function to remove an user
+   */
+  if (e.target.closest('#remove')) {
+    let removeContact = JSON.parse(localStorage.getItem("contacts"));
+    removeContact.forEach(function (target) {
+      let targetContactElement = document.querySelector('.name');
+      if (targetContactElement.innerHTML === target.name + ' ' + target.phoneNumbers + ' ' + target.contactMail) {
+        const newContacts = removeContact.filter(removeContact => removeContact.name !== target.name);
+        localStorage.setItem('contacts', JSON.stringify(newContacts))
+        onNavigate('/');
+        location.reload(true);
+      }
+    })
   }
 
 })
