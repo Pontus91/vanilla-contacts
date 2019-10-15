@@ -6,8 +6,3 @@ try {
  catch(e){
   store = {};
  }
-  
- store.save = function(){
-   localStorage.store = JSON.stringify(this);
- };
- 

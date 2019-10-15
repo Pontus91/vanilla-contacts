@@ -356,3 +356,286 @@
   color: #1f1f1f;
   cursor: pointer;
 }
+
+.restore {
+  margin-left: 20px;
+  height: 20px;
+  width: 65px;
+  border: 1px solid #add8e6;
+  color: #add8e6;
+  background-color: #1f1f1f;
+}
+
+.restore:hover {
+  color: #1f1f1f;
+  background-color: #add8e6;
+  cursor: pointer;
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+  .wrapper {
+    width: 100%;
+  }  
+  .title {
+    font-size: 91px;
+  }
+  .nameLabel {
+    font-size: 120px;
+  }
+  .nameInput {
+    width: 82%;
+    height: 68px;
+    font-size: 59px;
+  }
+  .phoneLabel {
+    font-size: 120px;
+  }
+  .phoneInput {
+    width: 182%;
+    height: 66px;
+    font-size: 59px;
+  }
+
+  .emailLabel {
+    font-size: 103px;
+  }
+  .add {
+    width: 435px;
+    height: 70px;
+    font-size: 27px;
+  }
+  .holder {
+    width: 80%;
+  }
+  .emailInput {
+    width: 182%;
+    height: 66px;
+    font-size: 59px;
+  }
+  
+  .emailHolder {
+    width: 80%;
+  }
+
+  .addEmail {
+    width: 435px;
+    height: 70px;
+    font-size: 27px;
+  }
+
+  .Button {
+    width: 80%;
+    font-size: 30px;
+    height: 70px;
+  }
+
+  .li {
+    width: 85%;
+    height: 92px;
+    text-align: center;
+    font-size: 38px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contactInfo {
+    width: 100%;
+    font-size: 66px;
+  }
+
+  .user {
+    width: 100%;
+  }
+
+  .adressText {
+    font-size: 50px;
+  }
+
+  .name {
+    font-size: 45px;
+  }
+
+  .edit {
+    width: 71%;
+    font-size: 30px;
+    height: 64px;
+  }
+
+  .nameInfo {
+    font-size: 45px;
+  }
+
+  .inputEdit {
+    width: 69%;
+    font-size: 45px;
+  }
+
+  .saveButton {
+    width: 71%;
+    font-size: 30px;
+    height: 64px;
+  }
+
+  .remove {
+    width: 71%;
+    font-size: 30px;
+    height: 64px;
+  }
+
+  .back {
+    width: 100%;
+    height: 79px;
+    font-size: 39px;
+  }
+
+  .historyDiv {
+    width: 100%;
+  }
+
+  .historyText {
+    font-size: 30px;
+  }
+
+  .restore {
+    width: 180px;
+    height: 50px;
+    font-size: 29px;
+  }
+
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px){
+  .wrapper {
+    width: 100%;
+  }  
+  .title {
+    font-size: 91px;
+  }
+  .nameLabel {
+    font-size: 120px;
+  }
+  .nameInput {
+    width: 82%;
+    height: 68px;
+    font-size: 59px;
+  }
+  .phoneLabel {
+    font-size: 120px;
+  }
+  .phoneInput {
+    width: 182%;
+    height: 66px;
+    font-size: 59px;
+  }
+
+  .emailLabel {
+    font-size: 103px;
+  }
+  .add {
+    width: 435px;
+    height: 70px;
+    font-size: 27px;
+  }
+  .holder {
+    width: 80%;
+  }
+  .emailInput {
+    width: 182%;
+    height: 66px;
+    font-size: 59px;
+  }
+  
+  .emailHolder {
+    width: 80%;
+  }
+
+  .addEmail {
+    width: 435px;
+    height: 70px;
+    font-size: 27px;
+  }
+
+  .Button {
+    width: 80%;
+    font-size: 30px;
+    height: 70px;
+  }
+
+  .li {
+    width: 85%;
+    height: 92px;
+    text-align: center;
+    font-size: 38px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contactInfo {
+    width: 100%;
+    font-size: 66px;
+  }
+
+  .user {
+    width: 100%;
+  }
+
+  .adressText {
+    font-size: 50px;
+  }
+
+  .name {
+    font-size: 45px;
+  }
+
+  .edit {
+    width: 71%;
+    font-size: 30px;
+    height: 64px;
+  }
+
+  .nameInfo {
+    font-size: 45px;
+  }
+
+  .inputEdit {
+    width: 69%;
+    font-size: 45px;
+  }
+
+  .saveButton {
+    width: 71%;
+    font-size: 30px;
+    height: 64px;
+  }
+
+  .remove {
+    width: 71%;
+    font-size: 30px;
+    height: 64px;
+  }
+
+  .back {
+    width: 100%;
+    height: 79px;
+    font-size: 39px;
+  }
+
+  .historyDiv {
+    width: 100%;
+  }
+
+  .historyText {
+    font-size: 30px;
+  }
+
+  .restore {
+    width: 180px;
+    height: 50px;
+    font-size: 29px;
+  } 
+} 

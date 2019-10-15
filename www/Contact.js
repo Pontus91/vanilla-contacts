@@ -30,6 +30,9 @@ function displayUsers() {
   }
 }
 
+/**
+ * All my functions using delegerad eventhantering.
+ */
 window.addEventListener('click', e => {
 
   /**
@@ -120,6 +123,10 @@ window.addEventListener('click', e => {
             historyText.setAttribute('class', 'historyText')
             let historyElement = document.querySelector('.historyDiv');
             historyText.innerHTML = target;
+            let restore = document.createElement('button');
+            restore.setAttribute('class', 'restore');
+            restore.innerHTML = "Återställ";
+            historyText.appendChild(restore);
             historyElement.appendChild(historyText);
           })
         }
@@ -209,6 +216,10 @@ window.addEventListener('click', e => {
           let historyElement = document.querySelector('.historyDiv');
           let latestHistory = contact.history.slice(-1)[0];
           historyText.innerHTML = latestHistory;
+          let restore = document.createElement('button');
+          restore.setAttribute('class', 'restore');
+          restore.innerHTML = "Återställ";
+          historyText.appendChild(restore);
           historyElement.appendChild(historyText);
 
 
@@ -218,6 +229,10 @@ window.addEventListener('click', e => {
           historyText.setAttribute('class', 'historyText')
           let historyElement = document.querySelector('.historyDiv');
           historyText.innerHTML = contact.history;
+          let restore = document.createElement('button');
+          restore.setAttribute('class', 'restore');
+          restore.innerHTML = "Återställ";
+          historyText.appendChild(restore);
           historyElement.appendChild(historyText);
         }
 
