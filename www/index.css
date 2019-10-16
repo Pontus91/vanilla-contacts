@@ -328,7 +328,6 @@
   height: 26px;
   color: #add8e6;
   background-color: #1f1f1f;
-  margin-top: 80px;
 }
 
 .saveButton:hover {
@@ -370,7 +369,22 @@
   color: #1f1f1f;
   background-color: #add8e6;
   cursor: pointer;
+}
 
+.addNumber {
+  border: 1px solid #add8e6;
+  height: 26px;
+  color: #add8e6;
+  background-color: #1f1f1f;
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+
+.addNumber:hover {
+  background-color: #add8e6;
+  border: 1px solid #1f1f1f;
+  color: #1f1f1f;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px){
@@ -474,6 +488,12 @@
   }
 
   .saveButton {
+    width: 71%;
+    font-size: 30px;
+    height: 64px;
+  }
+
+  .addNumber {
     width: 71%;
     font-size: 30px;
     height: 64px;

@@ -159,12 +159,16 @@ window.addEventListener('click', e => {
     saveButton.setAttribute('class', 'saveButton');
     saveButton.innerHTML = 'Spara redigerad kontakt';
     let targetForElement = document.querySelector('.contactName')
+    let additionalNumber = document.createElement('Button');
+    additionalNumber.setAttribute('class', 'addNumber')
+    additionalNumber.innerHTML = 'Lägg till nummer';
     targetForElement.appendChild(nameInfo);
     targetForElement.appendChild(nameEdit);
     targetForElement.appendChild(phoneInfo);
     targetForElement.appendChild(phoneEdit);
     targetForElement.appendChild(emailInfo);
     targetForElement.appendChild(emailEdit);
+    targetForElement.appendChild(additionalNumber);
     targetForElement.appendChild(saveButton);
 
     nameEdit.setAttribute('class', 'inputEdit');
@@ -173,6 +177,13 @@ window.addEventListener('click', e => {
     phoneEdit.setAttribute('id', 'phoneEdit')
     emailEdit.setAttribute('class', 'inputEdit');
     emailEdit.setAttribute('id', 'emailEdit');
+  }
+
+  if(e.target.closest('.addNumber')){
+    console.log('test')
+    let numberInput = document.createElement('input');
+    let inputTarget = document.querySelector('.contactName');
+    inputTarget.appendChild(numberInput);
   }
 
   /**
@@ -242,6 +253,23 @@ window.addEventListener('click', e => {
         let newContactInfo = JSON.parse(newHTMLforContact);
         newTarget.innerHTML = newContactInfo.name + ' ' + newContactInfo.phoneNumbers + ' ' + newContactInfo.contactMail;
       }
+    })
+  }
+
+  /**
+   * Reset contact
+   */
+  if (e.target.closest('.restore')){
+    let resetContact = JSON.parse(localStorage.getItem("contacts"))
+    resetContact.forEach(function (reseted){
+      let target = e.target.parentNode.innerHTML.slice(0, -42);
+      let contactHistory = reseted.history;
+      contactHistory.forEach(function (history){
+        if(history === target){
+          console.log(reseted.name);
+          console.log(history)
+        }
+      })
     })
   }
 
