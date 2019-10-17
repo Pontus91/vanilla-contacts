@@ -41,36 +41,43 @@ window.addEventListener('click', e => {
    * which is an object. And send this to our localStorage and also display the contact right away.
    */
   if (e.target.closest('.Button')) {
+  
     let nameValue = document.querySelector('#nameValue').value;
-    let emailValue = document.querySelector('#emailValue').value;
-    let phoneValue = document.querySelector('#phoneValue').value;
-    contactNumbers.push(phoneValue);
-    contactEmails.push(emailValue);
-    contactNumbers = contactNumbers.filter(v => v != '');
-    contactEmails = contactEmails.filter(v => v != '');
-    let userNumbers = [...contactNumbers]
-    let userEmails = [...contactEmails]
-    store.contact = new Contact(nameValue, userNumbers, userEmails, history)
-    let contacts;
-    if (localStorage.getItem('contacts') === null) {
-      contacts = [];
+    let must = new RegExp('([a-z]+)');
+    if(nameValue === '') {
+      alert('Must write a name')
     } else {
-      contacts = JSON.parse(localStorage.getItem('contacts'))
+      let emailValue = document.querySelector('#emailValue').value;
+      let phoneValue = document.querySelector('#phoneValue').value;
+      console.log(nameValue)
+      contactNumbers.push(phoneValue);
+      contactEmails.push(emailValue);
+      contactNumbers = contactNumbers.filter(v => v != '');
+      contactEmails = contactEmails.filter(v => v != '');
+      let userNumbers = [...contactNumbers]
+      let userEmails = [...contactEmails]
+      store.contact = new Contact(nameValue, userNumbers, userEmails, history)
+      let contacts;
+      if (localStorage.getItem('contacts') === null) {
+        contacts = [];
+      } else {
+        contacts = JSON.parse(localStorage.getItem('contacts'))
+      }
+      contacts = [...contacts, store.contact];
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      let latestUser = contacts.slice(-1)[0];
+      let targetWrapper = document.querySelector('.ul');
+      let newUser = document.createElement('div');
+      targetWrapper.appendChild(newUser);
+      newUser.setAttribute('class', 'li');
+      newUser.innerHTML = latestUser.name + ' ' + latestUser.phoneNumbers + ' ' + latestUser.contactMail;
+      document.querySelector('#nameValue').value = '';
+      document.querySelector('#emailValue').value = '';
+      document.querySelector('#phoneValue').value = '';
+      document.querySelector('#nameValue').select();
+      contactNumbers.length = 0;
+      contactEmails.length = 0;
     }
-    contacts = [...contacts, store.contact];
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-    let latestUser = contacts.slice(-1)[0];
-    let targetWrapper = document.querySelector('.ul');
-    let newUser = document.createElement('div');
-    targetWrapper.appendChild(newUser);
-    newUser.setAttribute('class', 'li');
-    newUser.innerHTML = latestUser.name + ' ' + latestUser.phoneNumbers + ' ' + latestUser.contactMail;
-    document.querySelector('#nameValue').value = '';
-    document.querySelector('#emailValue').value = '';
-    document.querySelector('#phoneValue').value = '';
-    document.querySelector('#nameValue').select();
-    contactNumbers.length = 0;
-    contactEmails.length = 0;
 
   }
 
@@ -122,7 +129,7 @@ window.addEventListener('click', e => {
             let historyText = document.createElement('p');
             historyText.setAttribute('class', 'historyText')
             let historyElement = document.querySelector('.historyDiv');
-            historyText.innerHTML = target;
+            historyText.innerHTML = target.name + ' ' + target.numbers + ' ' + target.emails;
             let restore = document.createElement('button');
             restore.setAttribute('class', 'restore');
             restore.innerHTML = "Återställ";
@@ -179,7 +186,7 @@ window.addEventListener('click', e => {
     emailEdit.setAttribute('id', 'emailEdit');
   }
 
-  if(e.target.closest('.addNumber')){
+  if (e.target.closest('.addNumber')) {
     console.log('test')
     let numberInput = document.createElement('input');
     let inputTarget = document.querySelector('.contactName');
@@ -220,31 +227,47 @@ window.addEventListener('click', e => {
         }
 
         if (contact.history.length > 0) {
-          let newHistory = [...contact.history, contactElement.innerHTML]
-          contact.history = newHistory;
-          let historyText = document.createElement('p');
-          historyText.setAttribute('class', 'historyText')
-          let historyElement = document.querySelector('.historyDiv');
-          let latestHistory = contact.history.slice(-1)[0];
-          historyText.innerHTML = latestHistory;
-          let restore = document.createElement('button');
-          restore.setAttribute('class', 'restore');
-          restore.innerHTML = "Återställ";
-          historyText.appendChild(restore);
-          historyElement.appendChild(historyText);
-
+          let contactsState = JSON.parse(localStorage.getItem("contacts"));
+          contactsState.forEach(function (contactWithHistory) {
+            if (contactWithHistory.name + ' ' + contactWithHistory.phoneNumbers + ' ' + contactWithHistory.contactMail === contactElement.innerHTML) {
+              let latestHistory = { name: '', numbers: [], emails: [] }
+              latestHistory.name = contactWithHistory.name;
+              latestHistory.numbers.push(contactWithHistory.phoneNumbers);
+              latestHistory.emails.push(contactWithHistory.contactMail);
+              contact.history.push(latestHistory);
+              let historyText = document.createElement('p');
+              historyText.setAttribute('class', 'historyText');
+              let historyElement = document.querySelector('.historyDiv');
+              let targetLatestChange = contact.history.slice(-1)[0];
+              historyText.innerHTML = targetLatestChange.name + ' ' + targetLatestChange.numbers + ' ' + targetLatestChange.emails;
+              let restore = document.createElement('button');
+              restore.setAttribute('class', 'restore');
+              restore.innerHTML = "Återställ";
+              historyText.appendChild(restore);
+              historyElement.appendChild(historyText);
+            }
+          })
 
         } else if (contact.history.length === 0) {
-          contact.history.push(contactElement.innerHTML);
-          let historyText = document.createElement('p');
-          historyText.setAttribute('class', 'historyText')
-          let historyElement = document.querySelector('.historyDiv');
-          historyText.innerHTML = contact.history;
-          let restore = document.createElement('button');
-          restore.setAttribute('class', 'restore');
-          restore.innerHTML = "Återställ";
-          historyText.appendChild(restore);
-          historyElement.appendChild(historyText);
+          let checkContacts = JSON.parse(localStorage.getItem("contacts"));
+          checkContacts.forEach(function (beforeEdit) {
+            if (beforeEdit.name + ' ' + beforeEdit.phoneNumbers + ' ' + beforeEdit.contactMail === contactElement.innerHTML) {
+              let newHistory = { name: '', numbers: [], emails: [] }
+              newHistory.name = beforeEdit.name;
+              newHistory.numbers.push(beforeEdit.phoneNumbers);
+              newHistory.emails.push(beforeEdit.contactMail);
+              contact.history.push(newHistory);
+              let historyText = document.createElement('p');
+              historyText.setAttribute('class', 'historyText')
+              let historyElement = document.querySelector('.historyDiv');
+              historyText.innerHTML = contact.history[0].name + ' ' + contact.history[0].numbers + ' ' + contact.history[0].emails;
+              let restore = document.createElement('button');
+              restore.setAttribute('class', 'restore');
+              restore.innerHTML = "Återställ";
+              historyText.appendChild(restore);
+              historyElement.appendChild(historyText);
+            }
+          })
         }
 
         localStorage.setItem('contacts', JSON.stringify(myCurrentContacts));
@@ -254,20 +277,23 @@ window.addEventListener('click', e => {
         newTarget.innerHTML = newContactInfo.name + ' ' + newContactInfo.phoneNumbers + ' ' + newContactInfo.contactMail;
       }
     })
+
   }
 
   /**
    * Reset contact
    */
-  if (e.target.closest('.restore')){
+  if (e.target.closest('.restore')) {
     let resetContact = JSON.parse(localStorage.getItem("contacts"))
-    resetContact.forEach(function (reseted){
+    resetContact.forEach(function (reseted) {
       let target = e.target.parentNode.innerHTML.slice(0, -42);
       let contactHistory = reseted.history;
-      contactHistory.forEach(function (history){
-        if(history === target){
-          console.log(reseted.name);
-          console.log(history)
+      console.log(target);
+      console.log(contactHistory.name);
+      contactHistory.forEach(function (history) {
+        if (history === target) {
+          // something 
+          // in progress
         }
       })
     })
