@@ -4,6 +4,10 @@ const contactDetails = `
     <div class="user">
      <div class="contactName">
       <p class="name"></p>  
+      <input class="addEmailInput"></input>
+      <button class="addNewEmail" id="addNewEmail">Lägg till email</button>
+      <input class="addNumberInput"></input>
+      <button class="addNumber" id="addNumber">Lägg till nummer</button>
       <button class="edit" id="edit">Redigera kontakt</button>
       </div>
       <button class="remove" id="remove">Ta bort kontakt</button>

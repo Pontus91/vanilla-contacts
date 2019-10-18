@@ -41,15 +41,13 @@ window.addEventListener('click', e => {
    * which is an object. And send this to our localStorage and also display the contact right away.
    */
   if (e.target.closest('.Button')) {
-  
+
     let nameValue = document.querySelector('#nameValue').value;
-    let must = new RegExp('([a-z]+)');
-    if(nameValue === '') {
-      alert('Must write a name')
+    if (!nameValue) {
+      alert('Din kontakt måste ha ett namn!');
     } else {
       let emailValue = document.querySelector('#emailValue').value;
       let phoneValue = document.querySelector('#phoneValue').value;
-      console.log(nameValue)
       contactNumbers.push(phoneValue);
       contactEmails.push(emailValue);
       contactNumbers = contactNumbers.filter(v => v != '');
@@ -166,16 +164,13 @@ window.addEventListener('click', e => {
     saveButton.setAttribute('class', 'saveButton');
     saveButton.innerHTML = 'Spara redigerad kontakt';
     let targetForElement = document.querySelector('.contactName')
-    let additionalNumber = document.createElement('Button');
-    additionalNumber.setAttribute('class', 'addNumber')
-    additionalNumber.innerHTML = 'Lägg till nummer';
+
     targetForElement.appendChild(nameInfo);
     targetForElement.appendChild(nameEdit);
     targetForElement.appendChild(phoneInfo);
     targetForElement.appendChild(phoneEdit);
     targetForElement.appendChild(emailInfo);
     targetForElement.appendChild(emailEdit);
-    targetForElement.appendChild(additionalNumber);
     targetForElement.appendChild(saveButton);
 
     nameEdit.setAttribute('class', 'inputEdit');
@@ -186,11 +181,54 @@ window.addEventListener('click', e => {
     emailEdit.setAttribute('id', 'emailEdit');
   }
 
-  if (e.target.closest('.addNumber')) {
-    console.log('test')
-    let numberInput = document.createElement('input');
-    let inputTarget = document.querySelector('.contactName');
-    inputTarget.appendChild(numberInput);
+  /**
+   * Add additioanl number to your contact.
+   */
+  if (e.target.closest('#addNumber')) {
+    let newNumberValue = document.querySelector('.addNumberInput').value;
+    let targetContactForNewNumber = JSON.parse(localStorage.getItem("contacts"));
+    targetContactForNewNumber.forEach(function (myTarget) {
+      let myContact = myTarget;
+      let contactElement = document.querySelector('.name');
+      if (contactElement.innerHTML === myContact.name + ' ' + myContact.phoneNumbers + ' ' + myContact.contactMail) {
+        if (newNumberValue <= 0) {
+          let numberInput = document.querySelector('.addNumberInput');
+          numberInput.setAttribute('placeholder', 'Nummer skrivs här');
+        } else {
+          myContact.phoneNumbers.push(newNumberValue);
+          localStorage.setItem('contacts', JSON.stringify(targetContactForNewNumber));
+          let newTarget = document.querySelector('.name');
+          let newHTMLforContact = (JSON.stringify(myContact));
+          let newContactInfo = JSON.parse(newHTMLforContact);
+          newTarget.innerHTML = newContactInfo.name + ' ' + newContactInfo.phoneNumbers + ' ' + newContactInfo.contactMail;
+        }
+      }
+    })
+  }
+
+  /**
+   * Add additional email to your contact;
+   */
+  if (e.target.closest('#addNewEmail')) {
+    let newEmailValue = document.querySelector('.addEmailInput').value;
+    let targetContactForNewNumber = JSON.parse(localStorage.getItem("contacts"));
+    targetContactForNewNumber.forEach(function (myTarget) {
+      let myContact = myTarget;
+      let contactElement = document.querySelector('.name');
+      if (contactElement.innerHTML === myContact.name + ' ' + myContact.phoneNumbers + ' ' + myContact.contactMail) {
+        if (newEmailValue <= 0) {
+          let numberInput = document.querySelector('.addEmailInput');
+          numberInput.setAttribute('placeholder', 'Email skrivs här');
+        } else {
+          myContact.contactMail.push(newEmailValue);
+          localStorage.setItem('contacts', JSON.stringify(targetContactForNewNumber));
+          let newTarget = document.querySelector('.name');
+          let newHTMLforContact = (JSON.stringify(myContact));
+          let newContactInfo = JSON.parse(newHTMLforContact);
+          newTarget.innerHTML = newContactInfo.name + ' ' + newContactInfo.phoneNumbers + ' ' + newContactInfo.contactMail;
+        }
+      }
+    })
   }
 
   /**
@@ -225,7 +263,6 @@ window.addEventListener('click', e => {
           newEmailAdresses.push(newEmails);
           contact.contactMail = [...newEmailAdresses];
         }
-
         if (contact.history.length > 0) {
           let contactsState = JSON.parse(localStorage.getItem("contacts"));
           contactsState.forEach(function (contactWithHistory) {
@@ -288,12 +325,20 @@ window.addEventListener('click', e => {
     resetContact.forEach(function (reseted) {
       let target = e.target.parentNode.innerHTML.slice(0, -42);
       let contactHistory = reseted.history;
-      console.log(target);
-      console.log(contactHistory.name);
       contactHistory.forEach(function (history) {
-        if (history === target) {
-          // something 
-          // in progress
+        if (history.name + ' ' + history.numbers + ' ' + history.emails === target) {
+          reseted.name = history.name;
+          reseted.phoneNumbers = history.numbers;
+          reseted.contactMail = history.emails;
+          let userInfo = document.querySelector('.name');
+          userInfo.innerHTML = reseted.name + ' ' + reseted.phoneNumbers + ' ' + reseted.contactMail;
+          let historyElement = e.target.parentNode;
+          if (history.name + ' ' + history.numbers + ' ' + history.emails === target) {
+            let removal = contactHistory.indexOf(history);
+            contactHistory.splice(removal, 1);
+          }
+          historyElement.remove();
+          localStorage.setItem('contacts', JSON.stringify(resetContact));
         }
       })
     })
