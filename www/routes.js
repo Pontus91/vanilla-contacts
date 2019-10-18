@@ -21,6 +21,9 @@ const onNavigate = (pathname) => {
   rootDiv.innerHTML = routes[pathname]
 }
 
+/**
+ * Onpopstate function, this like onNavigate is also gloabally so i can use onNavigate in my Contact.js file
+ */
 window.onpopstate = () => {
   rootDiv.innerHTML = routes[window.location.pathname]
 }

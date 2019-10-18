@@ -13,6 +13,10 @@ let contactNumbers = [];
 let contactEmails = [];
 let history = [];
 
+/**
+ * Once you load the site it automatically runs displayUsers() function.
+ * The purpose of this is to display your current contacts.
+ */
 window.onload = function () {
   displayUsers()
 }

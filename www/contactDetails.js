@@ -1,3 +1,6 @@
+/**
+ * Adding HTML with the use of variable to display only the user you clicked on.
+ */
 const contactDetails = `
   <div class="detailWrapper">
     <h1 class="contactInfo">Kontaktinformation</h1>
